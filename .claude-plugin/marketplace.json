@@ -1,0 +1,33 @@
+{
+  "name": "auracite",
+  "owner": {
+    "name": "AuraCite",
+    "email": "mohamad@auracite.de",
+    "url": "https://auracite.de"
+  },
+  "metadata": {
+    "description": "AuraCite plugins for Claude Code — AI Visibility / GEO tools and operating skills. See how ChatGPT, Gemini, and Perplexity mention, rank, and cite your brand."
+  },
+  "plugins": [
+    {
+      "name": "auracite-agent-hub",
+      "source": "./auracite-agent-hub",
+      "description": "Connect Claude Code to AuraCite's AI-visibility (GEO) data — brands, mentions, citations, share-of-voice, visibility score, competitors — plus safe operating skills.",
+      "version": "0.1.0",
+      "author": {
+        "name": "AuraCite",
+        "url": "https://auracite.de"
+      },
+      "homepage": "https://auracite.de",
+      "license": "LicenseRef-Proprietary",
+      "category": "ai-visibility",
+      "keywords": [
+        "ai-visibility",
+        "geo",
+        "generative-engine-optimization",
+        "mcp",
+        "auracite"
+      ]
+    }
+  ]
+}

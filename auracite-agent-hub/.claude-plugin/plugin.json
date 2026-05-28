@@ -1,0 +1,19 @@
+{
+  "name": "auracite-agent-hub",
+  "version": "0.1.0",
+  "description": "Connect Claude Code to AuraCite's AI-visibility (GEO) data and safe operating skills. Read brands, mentions, citations, share-of-voice, visibility score, and competitors for your AuraCite project.",
+  "author": {
+    "name": "AuraCite",
+    "email": "mohamad@auracite.de",
+    "url": "https://auracite.de"
+  },
+  "homepage": "https://auracite.de",
+  "license": "LicenseRef-Proprietary",
+  "keywords": [
+    "ai-visibility",
+    "geo",
+    "generative-engine-optimization",
+    "mcp",
+    "auracite"
+  ]
+}
