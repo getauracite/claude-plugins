@@ -2,10 +2,7 @@
   "mcpServers": {
     "auracite": {
       "type": "http",
-      "url": "https://auracite.de/mcp/rpc",
-      "headers": {
-        "X-API-Key": "${AURACITE_MCP_TOKEN}"
-      }
+      "url": "https://auracite.de/mcp/rpc"
     }
   }
 }
