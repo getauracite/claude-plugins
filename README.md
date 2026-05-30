@@ -1,50 +1,51 @@
-# AuraCite Claude Code marketplace
+# AuraCite plugins for Claude Code
 
-This directory is a [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces):
-its `.claude-plugin/marketplace.json` catalogs the AuraCite plugins. The marketplace **root** is this
-directory (the one containing `.claude-plugin/`), so plugin `source` paths resolve relative to it.
+[![claude plugin](https://img.shields.io/badge/Claude%20Code-plugin-00ffaa?logo=anthropic)](https://code.claude.com/docs/en/plugins)
 
-Plugins:
+This is the [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces)
+for [**AuraCite**](https://auracite.de) — the AI-visibility / GEO platform that tracks how
+ChatGPT, Gemini, and Perplexity mention, rank, cite, and recommend your brand.
 
-- [`auracite-agent-hub`](./auracite-agent-hub) — MCP connector + `ai-visibility` skill for AuraCite
-  GEO data. See its [README](./auracite-agent-hub/README.md) for install + API-key setup.
-
-## Install locally (today)
-
-From a clone of the AuraCite repo, with Claude Code launched at the repo root:
+## Install
 
 ```text
-/plugin marketplace add ./plugins/auracite-claude-marketplace
+/plugin marketplace add getauracite/claude-plugins
 /plugin install auracite-agent-hub@auracite
 ```
 
-## Publish for customers (public marketplace)
+Then run `/mcp` (or just ask a visibility question). Claude Code opens your browser, you sign in to
+AuraCite once and approve, and you're connected. **No API key to paste.**
 
-The AuraCite monorepo is **private**, so customers cannot `add` it. `/plugin marketplace add owner/repo`
-also requires `.claude-plugin/marketplace.json` at the **repo root**, which the monorepo does not have.
-Customer distribution therefore goes through a dedicated **public** repo whose root is this marketplace:
+> Plugin details, alternative auth (API key), and the transport note are in
+> [`auracite-agent-hub/README.md`](./auracite-agent-hub/README.md).
 
-1. Create a public repo, e.g. `auracite/claude-plugins` (mirror the Codex `auracite/codex-plugins`
-   naming).
-2. Copy the contents of this directory to the repo root so `.claude-plugin/marketplace.json` sits at
-   the root and `./auracite-agent-hub` resolves. Keep the monorepo copy as the source of truth and
-   sync on release (a `git subtree split` of `plugins/auracite-claude-marketplace` or a CI mirror).
-3. Customers then install with:
+## Plugins in this marketplace
 
-   ```text
-   /plugin marketplace add auracite/claude-plugins
-   /plugin install auracite-agent-hub@auracite
-   ```
+| Plugin | What it does |
+| --- | --- |
+| [`auracite-agent-hub`](./auracite-agent-hub) | Read-only MCP connector for AuraCite GEO data (brands, mentions, citations, share-of-voice, visibility score, competitors, trends, per-engine breakdown, brand comparison) plus the `ai-visibility` skill. |
 
-Alternatively, list each plugin with a `git-subdir` source pointing at this path inside a public
-mirror — but the dedicated public marketplace repo is the simplest "as easy as Codex" path.
+## Security & scope
 
-## Validate before publishing
+- Read-only `mcp:read` scope by default. Mutating and cost-bearing tools are hidden from this scope
+  and gated behind separate explicit-approval flows in the AuraCite app (CostGuard, credits,
+  idempotency, audit).
+- The OAuth access token is a scoped, revocable AuraCite API key. Revoke any time in **API Keys →
+  AuraCite app**.
+- `tenant_id` / `project_id` are bound to your account server-side — a token holder can only read
+  their own tenant's data.
+
+## Validate locally
 
 ```bash
-claude plugin validate ./plugins/auracite-claude-marketplace
-claude plugin validate ./plugins/auracite-claude-marketplace/auracite-agent-hub
+claude plugin validate .
+claude plugin validate ./auracite-agent-hub
 ```
 
-Never commit an API key, token, or secret into this marketplace, the plugins, or their `.mcp.json`.
-The connector reads the key from the `AURACITE_MCP_TOKEN` environment variable at runtime.
+Never commit an API key, token, or secret into this repo or any plugin's `.mcp.json` — the
+connector reads the OAuth token at runtime; an alternative static key is read from
+`AURACITE_MCP_TOKEN`.
+
+## License
+
+Proprietary — © AuraCite (`LicenseRef-Proprietary`). Contact: [auracite.de](https://auracite.de).
