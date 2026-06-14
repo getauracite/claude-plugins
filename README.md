@@ -6,6 +6,14 @@ This is the [Claude Code plugin marketplace](https://code.claude.com/docs/en/plu
 for [**AuraCite**](https://auracite.de) — the AI-visibility / GEO platform that tracks how
 ChatGPT, Gemini, and Perplexity mention, rank, cite, and recommend your brand.
 
+## See it in action
+
+![AuraCite Agent Hub demo — Claude Code reading live AI-visibility data](./media/auracite-agent-hub-demo.gif)
+
+One question in Claude Code → live data from three sources (tracked competitors, AI-engine mentions
+& citations, Google Search demand) → one reasoned answer. ▶ **[Watch the 70-second demo](./media/auracite-agent-hub-demo-promo.mp4)**
+— read-only, zero credits.
+
 ## Install
 
 ```text

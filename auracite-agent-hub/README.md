@@ -26,6 +26,27 @@ AuraCite's rate limits, CostGuard, and revocation.
 `tenant_id` and `project_id` are injected server-side from the token — a holder can only read their
 own tenant's data. Mutating and cost-bearing tools are hidden from read-only access.
 
+## Demo
+
+![AuraCite Agent Hub demo](../media/auracite-agent-hub-demo.gif)
+
+A real Claude Code session: one question — *"how visible is AuraCite in AI answers?"* — and the
+connector pulls live production data and reasons over it. In 30 days: **14 brand mentions** across AI
+engines and **1,609 citations** (AuraCite pages cited as a source), tracked against BrightEdge,
+Ahrefs, SEMrush, Profound and Otterly.ai — strongly cited, but the gap is non-branded category
+demand. Read-only, zero credits, zero provider cost.
+
+▶ **[Watch the 70-second demo](../media/auracite-agent-hub-demo-promo.mp4)**
+
+<details>
+<summary>Screenshots</summary>
+
+![Claude Code calling the auracite-agent-hub plugin](../media/plugin-demo-01-plugin-call.png)
+![AI-visibility metrics: 14 mentions, 1,609 citations, plus Google top queries](../media/plugin-demo-02-ai-visibility-data.png)
+![The agent's three-sentence synthesis of AuraCite's AI visibility](../media/plugin-demo-03-synthesis.png)
+
+</details>
+
 ## Alternative: static API key
 
 Prefer not to use OAuth (CI, headless, shared machine)? Swap the connector to an API key. Create a
