@@ -30,6 +30,11 @@ this skill. Check the connection with `/mcp` — if it isn't listed, see the plu
 | `get_trend_data` | Time-series for mentions/citations/sentiment |
 | `get_ai_engine_breakdown` | Per-engine breakdown (ChatGPT/Gemini/Perplexity/…) |
 | `compare_brands` | Two brands side-by-side |
+| `get_gsc_top_queries` | Top Google Search queries (clicks/impressions/CTR/avg position; page ≈ position/10) |
+| `get_gsc_top_pages` | Top Google Search pages/URLs (clicks/impressions/CTR/avg position) |
+| `get_gsc_search_analytics` | Raw Google Search rows per query+page over a day window |
+| `get_gsc_breakdown` | Google Search performance by `country` or `device` |
+| `get_gsc_trend` | Query deltas: current vs previous window (`position_delta` < 0 = improved) — "are we improving?" |
 
 `tenant_id` and `project_id` are injected server-side from the API key — you cannot read another
 tenant's data, and you don't need to pass them. Most tools need a `brand_id` or `project_id` you can

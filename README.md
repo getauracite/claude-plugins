@@ -31,7 +31,7 @@ AuraCite once and approve, and you're connected. **No API key to paste.**
 
 | Plugin | What it does |
 | --- | --- |
-| [`auracite-agent-hub`](./auracite-agent-hub) | Read-only MCP connector for AuraCite GEO data (brands, mentions, citations, share-of-voice, visibility score, competitors, trends, per-engine breakdown, brand comparison) plus the `ai-visibility` skill. |
+| [`auracite-agent-hub`](./auracite-agent-hub) | Read-only MCP connector for AuraCite GEO data (brands, mentions, citations, share-of-voice, visibility score, competitors, trends, per-engine breakdown, brand comparison) plus Google Search Console performance (top queries, top pages, country/device, query trends), and the `ai-visibility` skill. |
 
 ## Security & scope
 

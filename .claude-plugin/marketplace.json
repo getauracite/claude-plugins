@@ -12,8 +12,8 @@
     {
       "name": "auracite-agent-hub",
       "source": "./auracite-agent-hub",
-      "description": "Connect Claude Code to AuraCite's AI-visibility (GEO) data — brands, mentions, citations, share-of-voice, visibility score, competitors — plus safe operating skills.",
-      "version": "0.1.0",
+      "description": "Connect Claude Code to AuraCite's AI-visibility (GEO) data — brands, mentions, citations, share-of-voice, visibility score, competitors, Google Search Console (top queries, per-page rows, country/device) — plus safe operating skills.",
+      "version": "0.3.0",
       "author": {
         "name": "AuraCite",
         "url": "https://auracite.de"

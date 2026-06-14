@@ -19,7 +19,8 @@ AuraCite's rate limits, CostGuard, and revocation.
 ## What you get
 
 - **MCP connector `auracite`** → read-only GEO tools: brands, mentions, citations, share-of-voice,
-  visibility score, competitors, trends, per-engine breakdown, brand comparison.
+  visibility score, competitors, trends, per-engine breakdown, brand comparison, plus **Google Search
+  Console** performance (top queries, top pages, country/device breakdown, query trends).
 - **Skill `ai-visibility`** (invoked as `/auracite-agent-hub:ai-visibility`) → guides Claude to
   answer visibility questions from real AuraCite data.
 
