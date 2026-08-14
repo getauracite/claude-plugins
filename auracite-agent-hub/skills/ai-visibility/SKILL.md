@@ -35,6 +35,7 @@ this skill. Check the connection with `/mcp` — if it isn't listed, see the plu
 | `get_gsc_search_analytics` | Raw Google Search rows per query+page over a day window |
 | `get_gsc_breakdown` | Google Search performance by `country` or `device` |
 | `get_gsc_trend` | Query deltas: current vs previous window (`position_delta` < 0 = improved) — "are we improving?" |
+| `get_crawler_hits` | Which AI bots (GPTBot, ClaudeBot, PerplexityBot, …) fetch which pages, plus crawl→citation gaps: pages crawled a lot but rarely cited |
 
 `tenant_id` and `project_id` are injected server-side from the API key — you cannot read another
 tenant's data, and you don't need to pass them. Most tools need a `brand_id` or `project_id` you can
@@ -45,6 +46,9 @@ get from `list_brands`.
 1. `list_brands` to find the brand/project the user means.
 2. `get_dashboard_stats` or `get_visibility_score` for the headline picture.
 3. Drill in with `get_mentions` / `get_citations` / `get_ai_engine_breakdown` / `compare_brands`.
+   When citations are weak, check the input side too: `get_crawler_hits` shows whether AI bots reach
+   the pages at all. Heavy crawling with few citations is a content problem; no crawling at all is an
+   access problem (robots.txt, blocking, rendering) — different fixes, so don't guess between them.
 4. When the user asks "what should we do about it," reason from the evidence (which engines, which
    prompts, which competitors are winning citations) — don't invent numbers the tools didn't return.
 
