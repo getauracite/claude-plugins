@@ -1,59 +1,83 @@
-# AuraCite plugins for Claude Code
+# AuraCite Agent Hub for Claude Code
 
-[![claude plugin](https://img.shields.io/badge/Claude%20Code-plugin-00ffaa?logo=anthropic)](https://code.claude.com/docs/en/plugins)
+Connect Claude Code to your [AuraCite](https://auracite.de) AI-visibility (GEO) data: see how ChatGPT, Gemini, Perplexity, and Claude mention, rank, cite, and recommend your brand, without leaving your editor.
 
-This is the [Claude Code plugin marketplace](https://code.claude.com/docs/en/plugin-marketplaces)
-for [**AuraCite**](https://auracite.de) — the AI-visibility / GEO platform that tracks how
-ChatGPT, Gemini, and Perplexity mention, rank, cite, and recommend your brand.
+The plugin reads measurement data. It does not write, scan, or spend by default: mutating and cost-bearing tools live behind separate scopes and an explicit approval chain in the AuraCite app (see Safety model).
 
-## See it in action
-
-![AuraCite Agent Hub demo — Claude Code reading live AI-visibility data](./media/auracite-agent-hub-demo.gif)
-
-One question in Claude Code → live data from three sources (tracked competitors, AI-engine mentions
-& citations, Google Search demand) → one reasoned answer. ▶ **[Watch the 70-second demo](./media/auracite-agent-hub-demo-promo.mp4)**
-— read-only, zero credits.
-
-## Install
+## Install (one marketplace add, one install)
 
 ```text
 /plugin marketplace add getauracite/claude-plugins
 /plugin install auracite-agent-hub@auracite
 ```
 
-Then run `/mcp` (or just ask a visibility question). Claude Code opens your browser, you sign in to
-AuraCite once and approve, and you're connected. **No API key to paste.**
+## Quickstart
 
-> Plugin details, alternative auth (API key), and the transport note are in
-> [`auracite-agent-hub/README.md`](./auracite-agent-hub/README.md).
+1. After installing, run `/mcp` or just ask a visibility question. The first tool call opens your browser to `auracite.de`.
+2. Sign in and approve once. Claude Code stores a scoped, read-only token. No API key to paste.
+3. Ask, for example: *"How is my brand doing in ChatGPT vs. Perplexity this month?"*
 
-## Plugins in this marketplace
+## What you get
 
-| Plugin | What it does |
-| --- | --- |
-| [`auracite-agent-hub`](./auracite-agent-hub) | Read-only MCP connector for AuraCite GEO data (brands, mentions, citations, share-of-voice, visibility score, competitors, trends, per-engine breakdown, brand comparison) plus Google Search Console performance (top queries, top pages, country/device, query trends), and the `ai-visibility` skill. |
+- **MCP connector `auracite`** (read-only, `mcp:read`): tracked brands, AI mentions, citations of your pages as sources, share of voice, visibility score, competitors, trends, per-engine breakdown, brand comparison, AI-crawler access (which bots fetch which of your pages), and Google Search Console performance (top queries, per-page rows, country and device breakdowns, query trends).
+- **Skill `ai-visibility`** (invoked as `/auracite-agent-hub:ai-visibility`): guides Claude to answer visibility questions from real AuraCite data instead of invented numbers.
 
-## Security & scope
+## Safety model
 
-- Read-only `mcp:read` scope by default. Mutating and cost-bearing tools are hidden from this scope
-  and gated behind separate explicit-approval flows in the AuraCite app (CostGuard, credits,
-  idempotency, audit).
-- The OAuth access token is a scoped, revocable AuraCite API key. Revoke any time in **API Keys →
-  AuraCite app**.
-- `tenant_id` / `project_id` are bound to your account server-side — a token holder can only read
-  their own tenant's data.
+- The connector runs with a read-only token. Mutating and cost-bearing tools are filtered out of `tools/list` server-side; the token cannot even see them.
+- Writes require a separate `mcp:write` scope plus an approval chain (exact confirmation or a one-use approved retry, idempotency, audit events). Provider spend requires `mcp:spend`, a server-issued quote, hard credit caps, and CostGuard enforcement. None of this is part of the default connector.
+- `tenant_id` and `project_id` are injected server-side from the verified token. A token holder can only read their own tenant's data.
+- Tokens are short-lived and revocable from the AuraCite app at any time.
 
-## Validate locally
+## Alternative: static API key
+
+For CI, headless, or shared-machine setups, use a read-only key (`mcp:read`) created in the AuraCite app under API Keys, then set `.mcp.json` to:
+
+```json
+{
+  "mcpServers": {
+    "auracite": {
+      "type": "http",
+      "url": "https://auracite.de/mcp/rpc",
+      "headers": { "X-API-Key": "${AURACITE_MCP_TOKEN}" }
+    }
+  }
+}
+```
+
+Export the key, never commit it:
+
+```bash
+export AURACITE_MCP_TOKEN="gp_..."   # macOS/Linux
+```
+
+```powershell
+$env:AURACITE_MCP_TOKEN = "gp_..."   # Windows PowerShell
+```
+
+## Demo
+
+![AuraCite Agent Hub demo](./media/auracite-agent-hub-demo.gif)
+
+A real Claude Code session: one question, and the connector pulls live production data and reasons over it. Read-only, zero credits, zero provider cost.
+
+Watch the [70-second demo](./media/auracite-agent-hub-demo-promo.mp4).
+
+## Validate before publishing
 
 ```bash
 claude plugin validate .
 claude plugin validate ./auracite-agent-hub
 ```
 
-Never commit an API key, token, or secret into this repo or any plugin's `.mcp.json` — the
-connector reads the OAuth token at runtime; an alternative static key is read from
-`AURACITE_MCP_TOKEN`.
+Never commit an API key, token, or secret into this marketplace, the plugins, or their `.mcp.json`.
+
+## Support and legal
+
+- Website: https://auracite.de
+- Support: hello@auracite.de
+- Privacy: https://auracite.de/privacy · Terms: https://auracite.de/terms · Impressum: https://auracite.de/impressum
 
 ## License
 
-Proprietary — © AuraCite (`LicenseRef-Proprietary`). Contact: [auracite.de](https://auracite.de).
+Proprietary, (c) AuraCite (`LicenseRef-Proprietary`).
