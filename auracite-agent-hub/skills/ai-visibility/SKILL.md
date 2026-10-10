@@ -19,6 +19,7 @@ this skill. Check the connection with `/mcp` — if it isn't listed, see the plu
 
 | Tool | Use it for |
 | --- | --- |
+| `get_visibility_kpis` | Headline KPIs for a short report: AI visibility, recommendation rate, share of voice, with period, scope and data date |
 | `list_brands` | List the brands tracked in the project |
 | `get_dashboard_stats` | Mentions / citations / sentiment summary (period `7d`/`30d`/`90d`) |
 | `get_mentions` | Brand mentions detected in AI answers |
@@ -44,7 +45,10 @@ get from `list_brands`.
 ## Good working pattern
 
 1. `list_brands` to find the brand/project the user means.
-2. `get_dashboard_stats` or `get_visibility_score` for the headline picture.
+2. `get_visibility_kpis` for the headline picture. Report each metric with its period, its base
+   (`numerator` of `denominator` answers) and `data_as_of`. A metric with status `not_available`
+   is reported as "not available" plus its `reason`, never as 0. `brand_control` holds answers to
+   prompts that name the brand; keep it out of the headline.
 3. Drill in with `get_mentions` / `get_citations` / `get_ai_engine_breakdown` / `compare_brands`.
    When citations are weak, check the input side too: `get_crawler_hits` shows whether AI bots reach
    the pages at all. Heavy crawling with few citations is a content problem; no crawling at all is an

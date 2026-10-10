@@ -18,9 +18,12 @@ AuraCite's rate limits, CostGuard, and revocation.
 
 ## What you get
 
-- **MCP connector `auracite`** → read-only GEO tools: brands, mentions, citations, share-of-voice,
-  visibility score, competitors, trends, per-engine breakdown, brand comparison, plus **Google Search
-  Console** performance (top queries, top pages, country/device breakdown, query trends).
+- **MCP connector `auracite`** → read-only GEO tools: headline KPIs via `get_visibility_kpis`
+  (AI visibility, recommendation rate, share of voice; each `measured` or `not_available` with
+  reasons, `7d`/`30d`/`90d`; brand-name prompts separate under `brand_control`), plus brands,
+  mentions, citations, share-of-voice, visibility score, competitors, trends, per-engine breakdown,
+  brand comparison, and **Google Search Console** performance (top queries, top pages,
+  country/device breakdown, query trends).
 - **Skill `ai-visibility`** (invoked as `/auracite-agent-hub:ai-visibility`) → guides Claude to
   answer visibility questions from real AuraCite data.
 
